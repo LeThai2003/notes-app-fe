@@ -26,7 +26,7 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
     handleClearSearch();
   }
 
-  const hiddenInfo = location.pathname === "/login" || location.pathname === "/create-account";
+  const hiddenInfo = location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <div className='bg-white flex items-center justify-between px-6 py-2 drop-shadow'>
