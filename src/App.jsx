@@ -7,7 +7,7 @@ import SignUp from './pages/SignUp/SignUp';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const routes = (
-  <Router>
+  <Router basename="/">
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route element={<PrivateRoute/>}>
