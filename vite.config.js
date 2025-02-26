@@ -5,12 +5,11 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(),],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#2B85FF',
-        secondary: '#EF863E'
-      }
-    }
+  base: '/',
+  build: {
+    outDir: 'dist'
+  },
+  server: {
+    historyApiFallback: true
   }
 })
