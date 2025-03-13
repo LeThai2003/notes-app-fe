@@ -47,6 +47,10 @@ const Home = () => {
                 localStorage.clear();
                 navigate("/login");
             }
+            else
+            {
+                console.log(error);  
+            } 
         }
     }
 
@@ -59,7 +63,15 @@ const Home = () => {
                 setAllNotes(response.data.notes);
             }
         } catch (error) {
-            console.log(error);   
+            if(error.response.status === 401)
+            {
+                localStorage.clear();
+                navigate("/login");
+            }
+            else
+            {
+                console.log(error);  
+            }    
         }
     }
 
@@ -78,6 +90,11 @@ const Home = () => {
                 getAllNotes();
             }
         } catch (error) {
+            if(error.response.status === 401)
+            {
+                localStorage.clear();
+                navigate("/login");
+            }
             if(error.response && error.response.data && error.response.data.message)
             {
                 setError(error.response.data.message);

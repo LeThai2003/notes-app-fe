@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import OtpPassword from './pages/ForgotPassword/OtpPassword';
 import ResetPassword from './pages/ForgotPassword/ResetPassword';
+import ErrorNotFound from './pages/Error404/ErrorNotFound';
 
 const routes = (
   <Router basename="/">
@@ -21,6 +22,8 @@ const routes = (
       <Route path='/signup' element={<SignUp/>} />
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route path='/otp-password/:email' element={<OtpPassword/>}/>
+      <Route path='*' element={<ErrorNotFound/>}/>
+      
     </Routes>
   </Router>
 )
