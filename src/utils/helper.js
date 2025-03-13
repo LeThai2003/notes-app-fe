@@ -3,6 +3,17 @@ export const validateEmail = (email) => {
     return regex.test(email);
 }
 
+export const validateName = (name) => {
+    const regex = /^[a-zA-ZÀ-ỹ\s]+$/;
+    return regex.test(name);
+}
+
+export const validateOTP = (otp) => {
+    const regex = /^[0-9]{8}$/;
+    return regex.test(otp);
+}
+
+
 export const getNameInitials = (name) => {
     if(!name) return "";
 

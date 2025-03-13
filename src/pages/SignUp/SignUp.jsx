@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import PasswordInput from '../../components/Input/PasswordInput'
-import { validateEmail } from '../../utils/helper';
+import { validateEmail, validateName } from '../../utils/helper';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 
@@ -20,6 +20,11 @@ const SignUp = () => {
         if(!name)
         {
             setError("Vui lòng nhập họ và tên.");
+            return;
+        }
+        else if(!validateName(name))
+        {
+            setError("Vui lòng nhập đúng định dạng tên.");
             return;
         }
 

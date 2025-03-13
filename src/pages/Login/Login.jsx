@@ -77,10 +77,14 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}    
                         />
 
+                        <p className="text-sm text-right">
+                            <Link to={"/forgot-password"} className="text-xs text-primary hover:underline">Bạn quên mật khẩu?</Link>
+                        </p>
+
                         {error && <p className="text-xs text-red-500 pb-1">{error}
                         </p>}
 
-                        <button type="submit" className="btn-primary">Đăng Nhập</button>
+                        <button type="submit" className="btn-primary mt-4">Đăng Nhập</button>
 
                         <p className="text-sm text-center mt-4">
                             Chưa có tài khoản?{" "}
