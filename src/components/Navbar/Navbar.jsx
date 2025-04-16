@@ -29,8 +29,8 @@ const Navbar = ({userInfo, onSearchNote, handleClearSearch}) => {
   const hiddenInfo = location.pathname === "/login" || location.pathname === "/signup" || location.pathname ==="/forgot-password" || location.pathname.includes("/otp-password") || location.pathname ==="/reset-password";
 
   return (
-    <div className='bg-white flex items-center justify-between px-6 py-2 drop-shadow'>
-        <h2 className="font-medium text-xl text-black py-2">Notes</h2>
+    <div className='flex gap-5 bg-white border border-b border-gray-100 py-4 px-8 sticky top-0 z-20 backdrop-blur-[2px] drop-shadow'>
+       <h2 className='text-lg font-medium'>ExpNotes</h2>
 
         {!hiddenInfo && <>
           <SearchBar 

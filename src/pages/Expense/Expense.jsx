@@ -47,19 +47,19 @@ const Expense = () => {
 
     if(!category.trim())
     {
-      toast.error("Category is required");
+      toast.error("Khoản chi không được để trống");
       return;
     }
 
     if(!amount || isNaN(amount) || Number(amount) < 0)
     {
-      toast.error("Amount should be a valid number");
+      toast.error("Số tiền không hợp lệ");
       return;
     }
 
     if(!date)
     {
-      toast.error("Date is required");
+      toast.error("Ngày chi không được để trống");
       return;
     }
 
@@ -72,7 +72,7 @@ const Expense = () => {
       });
 
       setOpenAddExpenseModal(false);
-      toast.success("Expense added successfully");
+      toast.success("Thêm khoản chi thành công");
       fetchExpenseDetails();
 
     } catch (error) {
@@ -85,7 +85,7 @@ const Expense = () => {
     try {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
       setOpenDeleteAlert({show: false, data: null});
-      toast.success("Expense delete successfully");
+      toast.success("Xóa khoản chi thành công");
       fetchExpenseDetails();
     } catch (error) {
       console.error("Something went wrong: " + error);
@@ -108,7 +108,7 @@ const Expense = () => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error download expense details: " + error);
-      toast.error("Failed to download expense details. Please try again");
+      toast.error("Tải xuống chi tiết khoản tiêu thất bại, vui lòng thử lại sau!");
     }
   }
 

@@ -18,7 +18,7 @@ const CustomBarChar = ({data}) => {
           <XAxis stroke='none' dataKey="month" tick={{fontSize: 12, fill: "#555"}}/>
           <YAxis stroke='none' tick={{fontSize: 12, fill: "#555"}}/>
 
-          <Tooltip content={CustomTooltipExpenseBar}/>
+          <Tooltip content={CustomTooltipOverviewIncome}/>
 
           <Bar 
             dataKey="Tiền"

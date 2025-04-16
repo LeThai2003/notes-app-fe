@@ -49,19 +49,19 @@ const Income = () => {
 
     if(!source.trim())
     {
-      toast.error("Source is required");
+      toast.error("Nguồn thu không được để trống");
       return;
     }
 
     if(!amount || isNaN(amount) || Number(amount) < 0)
     {
-      toast.error("Amount should be a valid number");
+      toast.error("Số tiền không hợp lệ");
       return;
     }
 
     if(!date)
     {
-      toast.error("Date is required");
+      toast.error("Ngày thêm không được để trống");
       return;
     }
 
@@ -74,7 +74,7 @@ const Income = () => {
       });
 
       setOpenAddIncomeModal(false);
-      toast.success("Income added successfully");
+      toast.success("Thêm khoản thu thành công");
       fetchIncomeDetails();
 
     } catch (error) {
@@ -87,7 +87,7 @@ const Income = () => {
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
       setOpenDeleteAlert({show: false, data: null});
-      toast.success("Income delete successfully");
+      toast.success("Xóa khoản thu thành công");
       fetchIncomeDetails();
     } catch (error) {
       console.error("Something went wrong: " + error);
@@ -110,7 +110,7 @@ const Income = () => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error download income details: " + error);
-      toast.error("Failed to download income details. Please try again");
+      toast.error("Tải xuống chi tiết khoản thu thất bại, vui lòng thử lại sau!");
     }
   }
   
