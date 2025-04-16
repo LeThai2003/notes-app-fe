@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPath";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = () => {
 
         // -------
         try {
-            const response = await axiosInstance.post("users/login", {
+            const response = await axiosInstance.post(API_PATHS.USER.LOGIN, {
                 email, password
             });
 

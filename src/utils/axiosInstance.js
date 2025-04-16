@@ -1,10 +1,10 @@
 import axios from "axios"
+import { BASE_URL } from "./apiPath";
 
-const DOMAIN_API = "http://localhost:3000/";
-// const DOMAIN_API = "https://notes-app-api-kappa.vercel.app/";
+
 
 const axiosInstance = axios.create({
-  baseURL: DOMAIN_API,
+  baseURL: BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json"

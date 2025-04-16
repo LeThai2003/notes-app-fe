@@ -1,9 +1,15 @@
-export const BASE_URL = "http://localhost:3000"
+// export const BASE_URL = "http://localhost:3000"
+
+export const BASE_URL = "https://notes-app-api-kappa.vercel.app"
+
+// const DOMAIN_API = "http://localhost:3000/";
+// const DOMAIN_API = "https://note-api-pi.vercel.app/";
+// const DOMAIN_API = "https://notes-app-api-kappa.vercel.app/";
 
 export const API_PATHS = {
   USER: {
-    LOGIN: "/api/v1/auth/login",
-    REGISTER: "/api/v1/auth/register",
+    LOGIN: "/users/login",
+    REGISTER: "/users/create-account",
     GET_USER_INFO: "/users/get-info"
   },
   DASHBOARD:{

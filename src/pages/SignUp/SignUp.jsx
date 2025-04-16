@@ -4,6 +4,7 @@ import PasswordInput from '../../components/Input/PasswordInput'
 import { validateEmail, validateName } from '../../utils/helper';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPath';
 
 const SignUp = () => {
 
@@ -44,7 +45,7 @@ const SignUp = () => {
 
         // ---
         try {
-            const response = await axiosInstance.post("users/create-account", {
+            const response = await axiosInstance.post(API_PATHS.USER.REGISTER, {
                 name, email, password
             });
 
