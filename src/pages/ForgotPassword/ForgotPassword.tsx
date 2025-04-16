@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
 import axios from 'axios';
 import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPath';
 
 const ForgotPassword = () => {
 
@@ -30,7 +31,7 @@ const ForgotPassword = () => {
 
     // fetch API
     try {
-      const response = await axiosInstance.post("users/password/forgot", {
+      const response = await axiosInstance.post(API_PATHS.USER.FORGOT_PASSWORD, {
         email
       })
 

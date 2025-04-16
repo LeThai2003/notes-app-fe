@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { IoMdArrowBack } from "react-icons/io";
 import CoundownTime from '../../components/CoundownTime/CoundownTime';
 import Toast from '../../components/ToastMessage/Toast';
+import { API_PATHS } from '../../utils/apiPath';
 
 const OtpPassword = () => {
   const [otp, setOtp] = useState("");
@@ -53,7 +54,7 @@ const OtpPassword = () => {
 
     // fetch API
     try {
-      const response = await axiosInstance.post("users/password/otp", {
+      const response = await axiosInstance.post(API_PATHS.USER.OTP_PASSWORD, {
         otp
       })
 

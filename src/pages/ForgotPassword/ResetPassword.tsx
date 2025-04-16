@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { IoMdArrowBack } from "react-icons/io";
 import PasswordInput from '../../components/Input/PasswordInput';
 import Toast from '../../components/ToastMessage/Toast';
+import { API_PATHS } from '../../utils/apiPath';
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -48,7 +49,7 @@ const ResetPassword = () => {
 
     // fetch API
     try {
-      const response = await axiosInstance.post("users/password/reset", {
+      const response = await axiosInstance.post(API_PATHS.USER.RESET_PASSWORD, {
         accessToken, newPassword
       })
 

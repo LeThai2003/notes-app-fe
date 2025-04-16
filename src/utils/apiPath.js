@@ -10,7 +10,10 @@ export const API_PATHS = {
   USER: {
     LOGIN: "/users/login",
     REGISTER: "/users/create-account",
-    GET_USER_INFO: "/users/get-info"
+    GET_USER_INFO: "/users/get-info",
+    FORGOT_PASSWORD: "/users/password/forgot",
+    OTP_PASSWORD: "/users/password/otp",
+    RESET_PASSWORD: "/users/password/reset"
   },
   DASHBOARD:{
     GET_DATA: "/dashboards"
