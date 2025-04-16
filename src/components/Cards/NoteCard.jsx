@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import moment from "moment"
-import Modal from "react-modal"
+// import Modal from "react-modal"
 import {MdOutlinePushPin, MdCreate, MdDelete} from "react-icons/md";
+import Modal from "../Modal"
+import DeleteAlert from '../DeleteAlert';
 import ConfirmDelete from '../ConfirmLog/ConfirmDelete';
 
 const NoteCard = ({key, title, date, dateUpdate, content, tags, isPinded, onEdit, onDelete, onPinNote }) => {
@@ -48,7 +50,7 @@ const NoteCard = ({key, title, date, dateUpdate, content, tags, isPinded, onEdit
                 </div>
             </div>
 
-            <Modal
+            {/* <Modal
                 isOpen={openConfirmDelete.isShown}
                 onRequestclose={() => {}}
                 style={
@@ -62,6 +64,17 @@ const NoteCard = ({key, title, date, dateUpdate, content, tags, isPinded, onEdit
                 className="w-[30%] max-h-3/4 bg-white mt-28 mx-auto p-4 rounded-md overflow-auto "
             >
                 <ConfirmDelete id={key} onDelete={onDelete} title={title} onClose={onCloseDelete}/>
+            </Modal> */}
+
+            <Modal
+                isOpen={openConfirmDelete.isShown}
+                onClose={onCloseDelete}
+                title="Xóa ghi chú"
+            >
+                <DeleteAlert 
+                    content={`Bạn có chắc muốn xóa ghi chú "${title}" ?`}
+                    onDelete={onDelete}
+                />
             </Modal>
 
         </div>

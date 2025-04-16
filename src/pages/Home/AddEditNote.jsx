@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TagInput from '../../components/Input/TagInput'
 import { MdClose } from 'react-icons/md';
 import axiosInstance from '../../utils/axiosInstance';
+import toast from 'react-hot-toast';
 
 const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) => {
 
@@ -16,7 +17,8 @@ const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) =
 
             if(response.data && response.data.note)
             {
-                handleShownToast("add", "Thêm ghi chú thành công")
+                // handleShownToast("add", "Thêm ghi chú thành công")
+                toast.success("Thêm ghi chú thành công");
                 getAllNotes();
                 onClose();
             }
@@ -40,7 +42,8 @@ const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) =
 
             if(response.data && response.data.note)
             {
-                handleShownToast("add", "Cập nhật ghi chú thành công")
+                // handleShownToast("add", "Cập nhật ghi chú thành công")
+                toast.success("Cập nhật ghi chú thành công");
                 getAllNotes();
                 onClose();
             }
@@ -85,9 +88,9 @@ const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) =
     return (
         <div className="relative">
 
-            <button onClick={onClose} className='absolute top-0 right-0 cursor-pointer w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center'>
+            {/* <button onClick={onClose} className='absolute top-0 right-0 cursor-pointer w-10 h-10 rounded-full hover:bg-slate-50 flex items-center justify-center'>
                 <MdClose className='text-xl text-slate-400'/>
-            </button>
+            </button> */}
 
             <div className='flex flex-col gap-2'>
                 <label className='input-label'>Tiêu Đề</label>

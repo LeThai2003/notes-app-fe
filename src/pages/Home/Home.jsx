@@ -4,15 +4,21 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import NoteCard from '../../components/Cards/NoteCard'
 import { MdAdd } from 'react-icons/md'
 import AddEditNote from './AddEditNote'
-import Modal from "react-modal"
-import { getInfoUser } from '../../services/user'
+// import Modal from "react-modal"
 import axiosInstance from '../../utils/axiosInstance'
 import Toast from '../../components/ToastMessage/Toast'
 import EmptyCart from '../../components/Cards/EmptyCart'
 import addNote from "../../assets/add_note.png"
 import noNote from "../../assets/no_note.png" 
+import DashboardLayout from '../../components/Layouts/DashboardLayout'
+import { useUserAuth } from '../../hooks/useUserAuth'
+import NavbarSearchNote from '../../components/Navbar/NavbarSearchNote'
+import toast from 'react-hot-toast'
+import Modal from '../../components/Modal'
 
 const Home = () => {
+
+    useUserAuth();
 
     const navigate = useNavigate();
 
@@ -86,7 +92,8 @@ const Home = () => {
 
             if(response.data && !response.data.error)
             {
-                handleShownToast("delete", response.data.message);
+                // handleShownToast("delete", response.data.message);
+                toast.success(response.data.message);
                 getAllNotes();
             }
         } catch (error) {
@@ -98,6 +105,7 @@ const Home = () => {
             if(error.response && error.response.data && error.response.data.message)
             {
                 setError(error.response.data.message);
+                toast.error("Xóa ghi chú không thành công. Vui lòng thử lại sau");
             }
             else
             {
@@ -135,13 +143,15 @@ const Home = () => {
 
             if(response.data && !response.data.error)
             {
-                handleShownToast("add", response.data.message)
+                // handleShownToast("add", response.data.message)
+                toast.success(response.data.message);
                 getAllNotes();
             }
         } catch (error) {
             if(error.response && error.response.data && error.response.data.message)
             {
                 setError(error.response.data.message);
+                toast.error("Ghim/Bỏ ghim không thành công")
             }
             else
             {
@@ -166,67 +176,88 @@ const Home = () => {
     }, [])
 
     return (
-        <>
-            <Navbar userInfo={userInfo} onSearchNote={onSearchNote} handleClearSearch={handleClearSearch}/>
+        <DashboardLayout activeMenu="Ghi chú">
+            <div className='my-5 mx-auto'>
+                <>
+                    {/* <Navbar userInfo={userInfo} onSearchNote={onSearchNote} handleClearSearch={handleClearSearch}/> */}
 
-            <div className='container mx-auto px-8'>
-                {allNotes.length > 0 ?
-                    <div className='grid lg:grid-cols-3 md:grid-cols-2 xs-grid-cols-1 gap-4 mt-8 '>
-                        {allNotes.map((item, index) => (
-                            <NoteCard 
-                                key={item._id}
-                                title={item.title}
-                                date={item.createdAt}
-                                dateUpdate={item.updatedAt}
-                                content={item.content}
-                                tags={item.tags}
-                                isPinded={item.isPinned}
-                                onEdit={() => handleEdit(item)}
-                                onDelete={() => deleteNote(item._id)}
-                                onPinNote={() => updatePinned(item._id)}
-                            />
-                        ))}
-                    </div> : <EmptyCart image={isSearch ? noNote : addNote} message={isSearch ? "Không tìm thấy dữ liệu" : "Nhấn vào nút 'Thêm' ở gốc dưới cùng bên phải để tạo những ghi chú, ý tưởng ... đầu tiên của bạn"}/>
-                }
+                    <NavbarSearchNote onSearchNote={onSearchNote} handleClearSearch={handleClearSearch}/>
+
+                    <div className=''>
+                        {allNotes.length > 0 ?
+                            <div id="list-notes" className='grid lg:grid-cols-3 md:grid-cols-2 xs-grid-cols-1 gap-4 mt-8 '>
+                                {allNotes.map((item, index) => (
+                                    <NoteCard 
+                                        key={item._id}
+                                        title={item.title}
+                                        date={item.createdAt}
+                                        dateUpdate={item.updatedAt}
+                                        content={item.content}
+                                        tags={item.tags}
+                                        isPinded={item.isPinned}
+                                        onEdit={() => handleEdit(item)}
+                                        onDelete={() => deleteNote(item._id)}
+                                        onPinNote={() => updatePinned(item._id)}
+                                    />
+                                ))}
+                            </div> : <EmptyCart image={isSearch ? noNote : addNote} message={isSearch ? "Không tìm thấy dữ liệu" : "Nhấn vào nút 'Thêm' ở gốc dưới cùng bên phải để tạo những ghi chú, ý tưởng ... đầu tiên của bạn"}/>
+                        }
+                    </div>
+
+                    <button className='w-16 h-16 bg-primary hover:bg-blue-600 cursor-pointer rounded-2xl flex items-center justify-center fixed right-10 bottom-10' onClick={() => {setOpenAddEditModal({
+                        isShown: true,
+                        type: "add",
+                        data: null
+                    })}}>
+                        <MdAdd className='text-[32px] text-white'/>
+                    </button>
+
+                    {/* <Modal
+                        isOpen={openAddEditModal.isShown}
+                        onRequestclose={() => {}}
+                        style={
+                            {
+                                overlay: {
+                                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                                },
+                            }
+                        }
+                        contentLable=""
+                        className="w-[40%] max-h-3/4 bg-white mt-14 mx-auto p-4 rounded-md overflow-auto "
+                    >
+                        <AddEditNote
+                            type={openAddEditModal.type}
+                            noteData={openAddEditModal.data}
+                            onClose={() => {setOpenAddEditModal({isShown: false, type: "add", data: null})}}
+                            getAllNotes={getAllNotes}
+                            handleShownToast={handleShownToast}
+                        />
+                    </Modal> */}
+
+                    <Modal
+                        isOpen={openAddEditModal.isShown}
+                        onClose={() => {setOpenAddEditModal({isShown: false, type: "add", data: null})}}
+                        title={openAddEditModal.type == "add" ? "Thêm mới ghi chú" : "Chỉnh sửa ghi chú"}
+                    >
+                        <AddEditNote
+                            type={openAddEditModal.type}
+                            noteData={openAddEditModal.data}
+                            onClose={() => {setOpenAddEditModal({isShown: false, type: "add", data: null})}}
+                            getAllNotes={getAllNotes}
+                            handleShownToast={handleShownToast}
+                        />
+                    </Modal>
+                    
+                    <Toast
+                        isShown={showToastMessage.isShown}
+                        message={showToastMessage.message}
+                        type={showToastMessage.type}
+                        onClose={handleCloseToast}
+                    />
+                </>
             </div>
-
-            <button className='w-16 h-16 bg-primary hover:bg-blue-600 cursor-pointer rounded-2xl flex items-center justify-center absolute right-10 bottom-10' onClick={() => {setOpenAddEditModal({
-                isShown: true,
-                type: "add",
-                data: null
-            })}}>
-                <MdAdd className='text-[32px] text-white'/>
-            </button>
-
-            <Modal
-                isOpen={openAddEditModal.isShown}
-                onRequestclose={() => {}}
-                style={
-                    {
-                        overlay: {
-                            backgroundColor: "rgba(0, 0, 0, 0.2)",
-                        },
-                    }
-                }
-                contentLable=""
-                className="w-[40%] max-h-3/4 bg-white mt-14 mx-auto p-4 rounded-md overflow-auto "
-            >
-                <AddEditNote
-                    type={openAddEditModal.type}
-                    noteData={openAddEditModal.data}
-                    onClose={() => {setOpenAddEditModal({isShown: false, type: "add", data: null})}}
-                    getAllNotes={getAllNotes}
-                    handleShownToast={handleShownToast}
-                />
-            </Modal>
-            
-            <Toast
-                isShown={showToastMessage.isShown}
-                message={showToastMessage.message}
-                type={showToastMessage.type}
-                onClose={handleCloseToast}
-            />
-        </>
+        </DashboardLayout>
+        
     )
 }
 
