@@ -19,7 +19,7 @@ const IncomeOverview = ({transactions, onAddIncome}) => {
           <h5 className='text-lg'>Tổng quan thu nhập</h5>
           <p className='text-xs text-gray-400 mt-1'>Theo dõi khoản thu của bạn theo thời gian và từ đâu</p>
         </div>
-        <button className='add-btn' onClick={onAddIncome}>
+        <button id='btn_open_frIncome' className='add-btn' onClick={onAddIncome}>
           <LuPlus size={20}/> Thêm
         </button>
       </div>  

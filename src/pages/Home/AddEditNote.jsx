@@ -100,12 +100,14 @@ const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) =
                     className='text-2xl text-slate-900 outline-none p-2'
                     placeholder='Nhập tiêu đề ...'
                     onChange={({target}) => {setTitle(target.value)}}
+                    id='title'
                 />
             </div>
 
             <div className='flex flex-col gap-2 mt-4'>
                 <label className='input-label'>Nội Dung</label>
                 <textarea 
+                    id='content'
                     value={content}
                     className='text-sm text-slate-950 outline-none rounded bg-slate-50 p-2'
                     placeholder='Nhập nội dung ...'
@@ -122,6 +124,7 @@ const AddEditNote = ({type, noteData, onClose, getAllNotes, handleShownToast}) =
             {error && <p className='text-red-500 text-xs pt-4'>{error}</p>}
 
             <button 
+                id='btnAddNote'
                 className='btn-primary font-medium mt-5 p-3'
                 onClick={handleAddNote}
             >{type == "add" ? "Thêm Mới" : "Cập Nhật"}</button>

@@ -15,6 +15,7 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
         <div className='w-full border-b border-gray-200'>
             <div className='w-80 flex items-center justify-center px-4 bg-slate-100 rounded-md mb-4'>
                 <input
+                    id='search-note'
                     value={value}
                     type='text'
                     placeholder='Tìm kiếm ghi chú'
@@ -23,9 +24,9 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
                     onKeyDown={handleKeyDown}
                 />
 
-                {value && <IoMdClose className='cursor-pointer text-slate-500 mr-2 hover:text-black text-xl' onClick={onClearSearch}/>}
+                {value && <IoMdClose id='btn-delete-search' className='cursor-pointer text-slate-500 mr-2 hover:text-black text-xl' onClick={onClearSearch}/>}
 
-                <FaMagnifyingGlass className='cursor-pointer text-slate-400 hover:text-black' onClick={handleSearch}/>
+                <FaMagnifyingGlass id='btn-search-note' className='cursor-pointer text-slate-400 hover:text-black' onClick={handleSearch}/>
             </div>
         </div>
     )

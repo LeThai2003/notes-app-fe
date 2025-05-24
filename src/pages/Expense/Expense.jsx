@@ -20,7 +20,7 @@ const Expense = () => {
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
-    data: null
+    data: {id: null, date: null, title: null}
   });
 
   const fetchExpenseDetails = async () => {
@@ -81,10 +81,10 @@ const Expense = () => {
 
   }
 
-  const deleteExpense = async (id) => {
+  const deleteExpense = async (data) => {
     try {
-      await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
-      setOpenDeleteAlert({show: false, data: null});
+      await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(data.id));
+      setOpenDeleteAlert({show: false, data: {id: null, date: null, title: null}});
       toast.success("Xóa khoản chi thành công");
       fetchExpenseDetails();
     } catch (error) {
@@ -106,6 +106,7 @@ const Expense = () => {
       link.click();
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
+      toast.success("Tải xuống chi tiết khoản tiêu thành công!");
     } catch (error) {
       console.error("Error download expense details: " + error);
       toast.error("Tải xuống chi tiết khoản tiêu thất bại, vui lòng thử lại sau!");
@@ -132,8 +133,8 @@ const Expense = () => {
 
           <ExpenseList
             transactions={expenseData}
-            onDelete={(id) => {
-              setOpenDeleteAlert({show: true, data: id});
+            onDelete={(data) => {
+              setOpenDeleteAlert({show: true, data: data});
             }}
             onDownload={handleDownloadExpenseDetails}
           />
@@ -150,11 +151,11 @@ const Expense = () => {
 
         <Modal 
           isOpen={openDeleteAlert.show}
-          onClose={() => setOpenDeleteAlert({show: false, data: null})}
+          onClose={() => setOpenDeleteAlert({show: false, data: {id: null, date: null, title: null}})}
           title="Xóa khoản chi"
         >
           <DeleteAlert
-            content="Bạn muốn xóa khoản chi này?"
+            content={<>Bạn có muốn xóa khoản chi <strong>"{openDeleteAlert.data?.title}"</strong> vào ngày <strong>{openDeleteAlert.data?.date}</strong></>}
             onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
         </Modal>

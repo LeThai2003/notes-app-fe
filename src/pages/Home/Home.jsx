@@ -204,7 +204,7 @@ const Home = () => {
                         }
                     </div>
 
-                    <button className='w-16 h-16 bg-primary hover:bg-blue-600 cursor-pointer rounded-2xl flex items-center justify-center fixed right-10 bottom-10' onClick={() => {setOpenAddEditModal({
+                    <button id='add-note' className='w-16 h-16 bg-primary hover:bg-blue-600 cursor-pointer rounded-2xl flex items-center justify-center fixed right-10 bottom-10' onClick={() => {setOpenAddEditModal({
                         isShown: true,
                         type: "add",
                         data: null

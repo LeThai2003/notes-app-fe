@@ -19,7 +19,7 @@ const ExpenseOverview = ({transactions, onAddExpense}) => {
           <h5 className='text-lg'>Tổng quan chi tiêu</h5>
           <p className='text-xs text-gray-400 mt-1'>Theo dõi chi tiêu của bạn để biết bạn đã chi tiêu những gì</p>
         </div>
-        <button className='add-btn' onClick={onAddExpense}>
+        <button id='btn_open_frExpense' className='add-btn' onClick={onAddExpense}>
           <LuPlus size={20}/> Thêm
         </button>
       </div>  

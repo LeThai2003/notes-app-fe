@@ -13,6 +13,7 @@ const Modal = ({isOpen, onClose, title, children}) => {
             <h3 className='text-lg font-medium text-gray-900'>{title}</h3>
 
             <button
+              id='close_modal'
               onClick={onClose}
               type='button'
               className='text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg size-8 flex items-center justify-center cursor-pointer'

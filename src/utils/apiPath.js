@@ -1,6 +1,6 @@
-// export const BASE_URL = "http://localhost:3000"
+export const BASE_URL = "http://localhost:3000"
 
-export const BASE_URL = "https://notes-app-api-kappa.vercel.app"
+// export const BASE_URL = "https://notes-app-api-kappa.vercel.app"
 
 // const DOMAIN_API = "http://localhost:3000/";
 // const DOMAIN_API = "https://note-api-pi.vercel.app/";

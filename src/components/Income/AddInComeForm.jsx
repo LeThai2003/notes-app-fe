@@ -12,6 +12,7 @@ const AddInComeForm = ({onAddIncome}) => {
   });
 
   const handleChange = (key, value) => {
+    // console.log(key, value);
     setIncome({
       ...income,
       [key]: value
@@ -50,7 +51,7 @@ const AddInComeForm = ({onAddIncome}) => {
       />
 
       <div className='flex justify-end mt-6'> 
-        <button className='add-btn add-btn-fill' type='button' onClick={() => onAddIncome(income)}>
+        <button id='add_income' className='add-btn add-btn-fill' type='button' onClick={() => onAddIncome(income)}>
           Thêm
         </button>
       </div>

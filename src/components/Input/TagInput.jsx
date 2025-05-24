@@ -55,9 +55,10 @@ const TagInput = ({tags, setTags}) => {
                     placeholder='Thêm thẻ ...'
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    id='tags'
                 />
 
-                <button className='w-8 h-8 rounded flex items-center justify-center border border-blue-700 cursor-pointer hover:bg-blue-700'
+                <button id='add-tag' className='w-8 h-8 rounded flex items-center justify-center border border-blue-700 cursor-pointer hover:bg-blue-700'
                     onClick={addNewTag}
                 >
                     <MdAdd className='text-2xl text-blue-700 hover:text-white cursor-pointer'/>

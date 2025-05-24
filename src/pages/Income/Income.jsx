@@ -22,7 +22,7 @@ const Income = () => {
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
-    data: null
+    data: {id: null, date: null, title: null}
   });
 
   const fetchIncomeDetails = async () => {
@@ -64,6 +64,7 @@ const Income = () => {
       toast.error("Ngày thêm không được để trống");
       return;
     }
+    // console.log(date);
 
     try {
       await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
@@ -83,10 +84,10 @@ const Income = () => {
 
   }
   
-  const deleteIncome = async (id) => {
+  const deleteIncome = async (data) => {
     try {
-      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
-      setOpenDeleteAlert({show: false, data: null});
+      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(data.id));
+      setOpenDeleteAlert({show: false, data: {id: null, date: null, title: null}});
       toast.success("Xóa khoản thu thành công");
       fetchIncomeDetails();
     } catch (error) {
@@ -108,6 +109,7 @@ const Income = () => {
       link.click();
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
+      toast.success("Tải xuống chi tiết khoản thu thành công!");
     } catch (error) {
       console.error("Error download income details: " + error);
       toast.error("Tải xuống chi tiết khoản thu thất bại, vui lòng thử lại sau!");
@@ -135,8 +137,8 @@ const Income = () => {
 
           <IncomeList
             transactions={incomeData}
-            onDelete={(id) => {
-              setOpenDeleteAlert({show: true, data: id});
+            onDelete={(data) => {
+              setOpenDeleteAlert({show: true, data: data});
             }}
             onDownload={handleDownloadIncomeDetails}
           />
@@ -152,11 +154,11 @@ const Income = () => {
 
         <Modal 
           isOpen={openDeleteAlert.show}
-          onClose={() => setOpenDeleteAlert({show: false, data: null})}
+          onClose={() => setOpenDeleteAlert({show: false, data: {id: null, date: null, title: null}})}
           title="Xóa khoản thu"
         >
           <DeleteAlert
-            content="Bạn có chắc muốn xóa khoản thu này?"
+            content={<>Bạn có muốn xóa khoản thu <strong>"{openDeleteAlert.data?.title}"</strong> được thêm vào ngày <strong>{openDeleteAlert.data?.date}</strong> không?</>}
             onDelete={() => deleteIncome(openDeleteAlert.data)}
           />
         </Modal>

@@ -12,9 +12,9 @@ const Navbar = ({activeMenu}) => {
     <div className='flex gap-5 bg-white border border-b border-gray-100 py-4 px-8 sticky top-0 z-20 backdrop-blur-[2px]'>
       <button className='block lg:hidden text-black' onClick={() => setOpenSideMenu(!openSideMenu)}>
         {openSideMenu ? (
-          <HiOutlineX className='text-2xl'/>
+          <HiOutlineX id='x_menu' className='text-2xl'/>
         ) : (
-          <HiOutlineMenu className='text-2xl'/>
+          <HiOutlineMenu id='o_menu' className='text-2xl'/>
         )}
       </button>
       

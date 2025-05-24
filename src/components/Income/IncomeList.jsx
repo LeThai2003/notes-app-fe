@@ -9,7 +9,7 @@ const IncomeList = ({transactions, onDelete, onDownload}) => {
       <div className='flex items-center justify-between'>
         <h5 className='text-lg'>Các khoản thu</h5>
 
-        <button className='card-btn' onClick={onDownload}>
+        <button className='card-btn' onClick={onDownload} id='download_income'>
           Tải về <LuDownload className='text-base'/>
         </button>
       </div>
@@ -24,7 +24,7 @@ const IncomeList = ({transactions, onDelete, onDownload}) => {
             amount={item.amount}
             type="income"
             hideDeleteBtn={false}
-            onDelete={() => onDelete(item._id)}
+            onDelete={() => onDelete({id: item._id, date: moment(item.date).format("DD-MM-yyyy"), title: item.source})}
           />
         ))}
       </div>
